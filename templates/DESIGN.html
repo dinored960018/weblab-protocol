@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DESIGN — &lt;시스템 이름&gt;</title>
+<!--
+  BUILD 디자인 기획서 템플릿.
+  코딩 전에 이 문서를 채우고 사람에게 확인받는다. 확인 전에 index.html을 만들지 않는다.
+
+  쓰는 법
+  1) :root 의 --c1..--c6 을 이번 시스템의 실제 색으로 바꾼다. 칩이 자동으로 그 색으로 렌더된다.
+  2) <시스템 이름>, 각 섹션의 내용을 채운다.
+  3) 안 쓰는 섹션은 지우지 말고 "해당 없음"과 이유를 적는다.
+-->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ↓ 이번 시스템의 실제 토큰으로 교체한다 */
+  --c1:#101314; --c1-name:"ink";     --c1-role:"본문·전경";
+  --c2:#f4f5f3; --c2-name:"paper";   --c2-role:"배경";
+  --c3:#1b2fc4; --c3-name:"accent";  --c3-role:"강조·링크";
+  --c4:#9ba29f; --c4-name:"rule";    --c4-role:"보더·구분선";
+  --c5:#8a3b12; --c5-name:"warn";    --c5-role:"경고";
+  --c6:#e7eae8; --c6-name:"recess";  --c6-role:"눌린 면";
+
+  /* 문서 자체의 표시용 — 건드리지 않는다 */
+  --doc-bg:#eceeeb; --doc-ink:#14171a; --doc-soft:#5d6462; --doc-rule:#c3c8c5;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--doc-bg);color:var(--doc-ink);
+  font-family:var(--sans);font-size:15.5px;line-height:1.68;
+  word-break:keep-all;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 clamp(18px,4vw,44px)}
+header{padding:clamp(28px,6vw,60px) 0 0;border-bottom:2px solid var(--doc-ink);padding-bottom:20px}
+.kicker{margin:0 0 .5rem;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--doc-soft)}
+h1{margin:0;font-size:clamp(1.9rem,5.4vw,3.1rem);line-height:1.08;letter-spacing:-.02em}
+.oneline{margin:.7rem 0 0;font-size:clamp(15px,1.9vw,18px);color:var(--doc-soft);max-width:46ch}
+.meta{margin:14px 0 0;font-family:var(--mono);font-size:12px;color:var(--doc-soft);display:flex;gap:1.4em;flex-wrap:wrap}
+
+section{margin:clamp(32px,5.5vw,56px) 0 0}
+h2{
+  font-size:clamp(1.15rem,2.6vw,1.5rem);margin:0 0 12px;letter-spacing:-.012em;
+  border-bottom:1px solid var(--doc-ink);padding-bottom:7px;
+}
+h2 .n{font-family:var(--mono);font-size:.62em;color:var(--doc-soft);margin-right:.7em}
+h3{font-size:15px;margin:22px 0 6px;font-weight:600}
+p{margin:0 0 .85rem}
+.hint{color:var(--doc-soft);font-size:13.5px;margin:-2px 0 12px}
+
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--doc-rule);vertical-align:top}
+thead th{border-bottom:1.5px solid var(--doc-ink);font-size:12px;color:var(--doc-soft)}
+td.k{white-space:nowrap;font-family:var(--mono);font-size:13px}
+
+/* 컬러 칩 — --c1..--c6 을 바꾸면 자동 반영된다 */
+.chips{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));margin:14px 0;list-style:none;padding:0}
+.chip{border:1px solid var(--doc-rule)}
+.chip i{display:block;height:64px}
+.chip b{display:block;padding:7px 9px 1px;font-family:var(--mono);font-size:12px;font-weight:500}
+.chip span{display:block;padding:0 9px 8px;font-size:12px;color:var(--doc-soft)}
+.chip:nth-child(1) i{background:var(--c1)} .chip:nth-child(1) b::after{content:var(--c1-name)}
+.chip:nth-child(2) i{background:var(--c2)} .chip:nth-child(2) b::after{content:var(--c2-name)}
+.chip:nth-child(3) i{background:var(--c3)} .chip:nth-child(3) b::after{content:var(--c3-name)}
+.chip:nth-child(4) i{background:var(--c4)} .chip:nth-child(4) b::after{content:var(--c4-name)}
+.chip:nth-child(5) i{background:var(--c5)} .chip:nth-child(5) b::after{content:var(--c5-name)}
+.chip:nth-child(6) i{background:var(--c6)} .chip:nth-child(6) b::after{content:var(--c6-name)}
+
+/* 타입 스케일 미리보기 */
+.scale{list-style:none;margin:12px 0;padding:0;border-top:1px solid var(--doc-rule)}
+.scale li{
+  display:flex;align-items:baseline;gap:16px;padding:9px 0;border-bottom:1px solid var(--doc-rule);
+}
+.scale code{font-family:var(--mono);font-size:11.5px;color:var(--doc-soft);white-space:nowrap;min-width:92px}
+.scale span{line-height:1.2;letter-spacing:-.02em}
+
+.sig{border-left:3px solid var(--c3);background:#fff;padding:16px 20px;margin:12px 0}
+.sig p:last-child{margin:0}
+.no{border-left:3px solid var(--c5);background:#fff;padding:16px 20px;margin:12px 0}
+.no p:last-child{margin:0}
+.no ul{margin:.4rem 0 0}
+
+footer{margin-top:clamp(40px,7vw,72px);border-top:1px solid var(--doc-rule);padding:14px 0 44px;font-family:var(--mono);font-size:11.5px;color:var(--doc-soft)}
+a{color:var(--c3);text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">DESIGN BRIEF</p>
+  <h1>&lt;시스템 이름&gt;</h1>
+  <p class="oneline">&lt;한 줄 정의. 이 시스템이 무엇을 위한 것이고 무엇처럼 보이는가.&gt;</p>
+  <p class="meta">
+    <span>WORK &lt;build-NN-슬러그&gt;</span>
+    <span>CONCEPT &lt;번호·이름&gt;</span>
+    <span>&lt;YYYY-MM-DD&gt;</span>
+    <span>v1</span>
+  </p>
+</header>
+
+<section>
+  <h2><span class="n">01</span>참고한 디자인 시스템</h2>
+  <p class="hint">무엇을 봤고, 무엇을 가져오고, 무엇을 버리는지 적는다. 링크 필수.</p>
+  <table>
+    <thead><tr><th>시스템</th><th>가져올 것</th><th>버릴 것</th></tr></thead>
+    <tbody>
+      <tr><td class="k"><a href="#">&lt;이름&gt;</a></td><td>&lt;구체적으로&gt;</td><td>&lt;이유와 함께&gt;</td></tr>
+      <tr><td class="k"><a href="#">&lt;이름&gt;</a></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">02</span>컬러</h2>
+  <p class="hint">4~6개. 그 이상은 통제가 안 된다. 위 <code>:root</code>의 값을 바꾸면 칩이 따라 바뀐다.</p>
+  <ul class="chips">
+    <li class="chip"><i></i><b></b><span>본문·전경</span></li>
+    <li class="chip"><i></i><b></b><span>배경</span></li>
+    <li class="chip"><i></i><b></b><span>강조·링크</span></li>
+    <li class="chip"><i></i><b></b><span>보더·구분선</span></li>
+    <li class="chip"><i></i><b></b><span>경고</span></li>
+    <li class="chip"><i></i><b></b><span>눌린 면</span></li>
+  </ul>
+  <p><b>왜 이 팔레트인가</b> — &lt;주제와 어떻게 연결되는지. "예뻐서"는 이유가 아니다.&gt;</p>
+  <p><b>본문 대비비</b> — &lt;전경/배경 조합의 실제 수치. 4.5:1 이상&gt;</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span>타이포</h2>
+  <table>
+    <thead><tr><th>역할</th><th>폰트</th><th>출처</th></tr></thead>
+    <tbody>
+      <tr><td class="k">디스플레이</td><td>&lt;이름 / 가변축&gt;</td><td>&lt;CDN URL — 응답 확인함&gt;</td></tr>
+      <tr><td class="k">본문</td><td>&lt;이름&gt;</td><td></td></tr>
+      <tr><td class="k">유틸(수치)</td><td>&lt;고정폭&gt;</td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="hint">한글에 고정폭을 지정하지 않는다. 글리프가 없어 대체 폰트로 떨어지며 자간이 벌어진다.</p>
+
+  <h3>스케일 — 배율 &lt;1.250&gt;</h3>
+  <ul class="scale">
+    <li><code>h1 · 49px</code><span style="font-size:49px;font-weight:700">한글 제목 Display</span></li>
+    <li><code>h2 · 39px</code><span style="font-size:39px;font-weight:700">한글 제목 Display</span></li>
+    <li><code>h3 · 25px</code><span style="font-size:25px;font-weight:600">한글 제목</span></li>
+    <li><code>body · 16px</code><span style="font-size:16px">본문입니다. 읽기 편한 길이를 확인합니다.</span></li>
+    <li><code>small · 13px</code><span style="font-size:13px">캡션과 라벨</span></li>
+  </ul>
+  <p><b>자간</b> 제목 &lt;-0.02em&gt; / 본문 &lt;-0.003em&gt; &nbsp;·&nbsp;
+     <b>행간</b> 제목 &lt;1.25&gt; / 본문 &lt;1.7&gt; &nbsp;·&nbsp;
+     <b>측정폭</b> 한글 &lt;25~40자&gt;</p>
+</section>
+
+<section>
+  <h2><span class="n">04</span>간격 · 그리드</h2>
+  <table>
+    <thead><tr><th>항목</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td class="k">spacing scale</td><td>&lt;4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96&gt;</td></tr>
+      <tr><td class="k">최대폭</td><td>&lt;px&gt;</td></tr>
+      <tr><td class="k">컬럼 / 거터</td><td>&lt;개 / px&gt;</td></tr>
+      <tr><td class="k">좌우 여백</td><td>&lt;데스크톱 / 모바일&gt;</td></tr>
+      <tr><td class="k">브레이크포인트</td><td>&lt;px&gt;</td></tr>
+      <tr><td class="k">모서리</td><td>&lt;radius. 0이면 0이라고 적는다&gt;</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">05</span>아이콘</h2>
+  <p><b>세트</b> &lt;이름&gt; &nbsp;·&nbsp; <b>크기</b> &lt;px&gt; &nbsp;·&nbsp; <b>스트로크</b> &lt;px&gt; &nbsp;·&nbsp; <b>모서리</b> &lt;round / butt&gt;</p>
+  <p><b>왜</b> &lt;타이포·모서리 처리와 어떻게 맞는지&gt;</p>
+</section>
+
+<section>
+  <h2><span class="n">06</span>모션</h2>
+  <table>
+    <thead><tr><th>항목</th><th>기본값</th></tr></thead>
+    <tbody>
+      <tr><td class="k">duration</td><td>&lt;진입 ms / 퇴장 ms&gt;</td></tr>
+      <tr><td class="k">easing</td><td>&lt;cubic-bezier(...)&gt;</td></tr>
+      <tr><td class="k">이동거리</td><td>&lt;px&gt;</td></tr>
+      <tr><td class="k">스태거</td><td>&lt;ms&gt;</td></tr>
+      <tr><td class="k">구현</td><td>&lt;CSS만 / 라이브러리 이름과 이유&gt;</td></tr>
+    </tbody>
+  </table>
+  <p class="hint">CSS로 되는 걸 라이브러리로 하면 그 WORK는 배우는 게 없다. reduced-motion 대응은 필수다.</p>
+</section>
+
+<section>
+  <h2><span class="n">07</span>말투</h2>
+  <p><b>업종</b> &lt;핀테크 / 커머스 / B2B SaaS / 커뮤니티 / …&gt;</p>
+  <table>
+    <thead><tr><th>자리</th><th>체</th><th>이 시스템에서의 예</th></tr></thead>
+    <tbody>
+      <tr><td class="k">메뉴·섹션헤드·CTA</td><td>명사종결 / ~하기</td><td>&lt;실제로 쓸 문구&gt;</td></tr>
+      <tr><td class="k">기능 설명</td><td>해요체 · 20자 안쪽</td><td></td></tr>
+      <tr><td class="k">슬로건 (1~2개)</td><td>다체로 단정</td><td></td></tr>
+      <tr><td class="k">푸터 고지</td><td>합니다체</td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="hint">명사종결을 절반 이상 쓴다. 근거는 그 주 <code>notes/voice.md</code>.</p>
+</section>
+
+<section>
+  <h2><span class="n">08</span>시그니처</h2>
+  <div class="sig">
+    <p><b>&lt;한 줄로 이름 붙인 요소&gt;</b></p>
+    <p>&lt;무엇인가. 어떻게 동작하나.&gt;</p>
+    <p>&lt;왜 이게 주제를 드러내나. 이 하나만 기억돼도 성공이다.&gt;</p>
+  </div>
+  <p class="hint">대담함은 한 곳에만 쓴다. 나머지는 조용하고 규율 있게 둔다.</p>
+</section>
+
+<section>
+  <h2><span class="n">09</span>안 할 것</h2>
+  <div class="no">
+    <p>이번에 <b>의도적으로 피하는</b> 기본값. 왜 피하는지 같이 적는다.</p>
+    <ul>
+      <li>&lt;예: 크림 배경 + 고대비 세리프 + 테라코타 — 지금 가장 흔한 조합이라&gt;</li>
+      <li>&lt;예: 니어블랙 + 애시드 그린 단일 강조&gt;</li>
+      <li>&lt;예: 근거 없는 01/02/03 넘버링 — 순서가 정보가 아닐 때&gt;</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  DESIGN BRIEF · &lt;시스템 이름&gt; · v1 · &lt;YYYY-MM-DD&gt; — 확인 후 index.html 작성
+</footer>
+
+</div>
+</body>
+</html>
