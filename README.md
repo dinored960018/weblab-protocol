@@ -20,5 +20,5 @@ CLI 도구(Claude Code, Codex CLI)는 작업 레포의 `CLAUDE.md` / `AGENTS.md`
 |---|---|
 | `PROTOCOL.md` | ★ 단일 원본. AI가 따라야 할 작업 절차 전부 |
 | `GLOSSARY.md` | 용어 사전. 시스템 용어 + 웹 용어(매주 자람) |
-| `CHECKLIST.md` | CLONE/BUILD 완료 판정 기준 |
-| `templates/` | SPEC / REVIEW / NOTES / CONCEPTS / DESIGN 템플릿 |
+| `CHECKLIST.md` | 모작 완료 판정 기준 |
+| `templates/` | SPEC / REVIEW / CONCEPTS 템플릿 |
