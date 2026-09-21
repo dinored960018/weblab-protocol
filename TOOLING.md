@@ -9,26 +9,39 @@
 
 ## 설치
 
-작업 레포(`weblab`) 루트에서 실행한다. **순서가 있다.**
+**홈 디렉터리에서 유저 스코프로 설치한다.** 프로젝트 스코프로 깔지 않는다.
 
 ```bash
+cd ~
+
 npx --yes skills@latest add emilkowalski/skills --skill "emil-design-eng" --agent claude-code --yes --copy
 npx --yes skills@latest add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" --agent claude-code --yes --copy
-npx --yes impeccable@latest install --providers=claude --scope=project
+npx --yes impeccable@latest install --providers=claude --scope=user
 
-claude mcp add --scope project playwright npx @playwright/mcp@latest
-claude mcp add --scope project --transport http figma https://mcp.figma.com/mcp
+claude mcp add --scope user playwright npx @playwright/mcp@latest
+claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp
 ```
 
-설치 후:
+### 왜 유저 스코프인가 — 실제로 걸렸던 문제
+
+2026-09-21에 프로젝트 스코프(`--scope=project`)로 깔았다가 둘 다 안 됐다.
+
+- **스킬이 안 뜬다.** 프로젝트 스코프 스킬은 Claude Code를 **그 폴더에서 열었을 때만** 로드된다.
+  홈에서 열면 목록에 없다.
+- **MCP가 계속 승인 대기.** 프로젝트 `.mcp.json`은 레포에서 딸려올 수 있는 것이라
+  매번 승인을 요구한다. 유저 스코프는 안 묻는다.
+
+유저 스코프로 옮기니 스킬은 즉시 잡혔고 Playwright는 바로 `Connected`가 됐다.
+
+설치 결과는 `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude.json`에 남는다.
+**작업 레포에는 아무것도 커밋하지 않는다.** 재현은 위 명령으로 한다.
+
+### 설치 후
 
 1. **Claude Code를 재시작한다.** 스킬은 재시작해야 등록된다.
-2. MCP 두 개는 **승인이 필요하다.** 프로젝트 스코프라 첫 실행 때 확인을 묻는다.
-3. Figma MCP는 **OAuth 로그인**이 따로 필요하다.
+2. `claude mcp list`로 확인한다. Playwright는 `✔ Connected`가 떠야 한다.
+3. **Figma MCP는 OAuth 로그인**이 따로 필요하다. 처음엔 `! Needs authentication`으로 뜬다.
 4. `/impeccable init`을 한 번 돌려 `PRODUCT.md`를 만든다.
-
-설치 결과는 `weblab/.claude/skills/`, `weblab/.claude/agents/`, `weblab/.mcp.json`에 남는다.
-`.mcp.json`은 커밋한다 — 다른 기계·다른 AI에서도 같은 구성이 되게 하기 위해서다.
 
 ---
 
