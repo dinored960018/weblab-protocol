@@ -13,12 +13,14 @@ CLI 도구(Claude Code, Codex CLI)는 작업 레포의 `CLAUDE.md` / `AGENTS.md`
 - 작업 규격: https://raw.githubusercontent.com/dinored960018/weblab-protocol/main/PROTOCOL.md
 - 용어 사전: https://raw.githubusercontent.com/dinored960018/weblab-protocol/main/GLOSSARY.md
 - 완료 판정: https://raw.githubusercontent.com/dinored960018/weblab-protocol/main/CHECKLIST.md
+- 도구 사용법: https://raw.githubusercontent.com/dinored960018/weblab-protocol/main/TOOLING.md
 
 ## 파일
 
 | 파일 | 내용 |
 |---|---|
 | `PROTOCOL.md` | ★ 단일 원본. AI가 따라야 할 작업 절차 전부 |
+| `TOOLING.md` | 도구. 어느 단계에서 무엇을 쓰는가 |
 | `GLOSSARY.md` | 용어 사전. 시스템 용어 + 웹 용어(매주 자람) |
 | `CHECKLIST.md` | 모작 완료 판정 기준 |
 | `templates/` | SPEC / REVIEW / CONCEPTS 템플릿 |
