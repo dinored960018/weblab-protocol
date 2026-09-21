@@ -175,13 +175,40 @@ works/2026-W38/clone-01-white-desert/
 - 더미 텍스트는 **원본과 같은 글자 수 대역**으로 맞춘다.
 - `Lorem ipsum`을 쓰지 않는다. 그 사이트의 업종에 맞는 그럴듯한 더미를 쓴다.
 
-### 말투
+### 말투 (2026-09-21 지정)
 
-> **[작성 대기]** 사용자가 지정할 예정이다.
-> 지정 전까지 AI는 **말투를 임의로 정하지 않는다.** 더미 카피를 써야 하면
-> 먼저 물어본다.
->
-> 지정되면 이 자리에 규칙이 들어가고, `templates/`와 `CHECKLIST.md`도 같이 고친다.
+> 사용자 지정 원문:
+> **"말투는 어워드 그대로 똑같은 말 사용하면 됨 자연스럽고 인간언어로 과장된표현 없이.
+> 단어로 끝나고 그냥 깔끔하게 딱 필요한 말만 넣고 꾸며주는말 쓰지말고"**
+
+다섯 줄로 정리한다.
+
+1. **원본의 말투를 그대로 따른다.** 원본이 짧게 쓰면 짧게, 담담하면 담담하게.
+   내 문체를 얹지 않는다. 모작은 카피의 톤까지 모작이다.
+2. **단어로 끝낸다.** 문장을 만들 필요가 없으면 만들지 않는다.
+   메뉴·섹션 제목·카드 제목·버튼은 명사구로 끊는다.
+3. **꾸미는 말을 쓰지 않는다.** 형용사·부사로 띄우지 않는다.
+   빼도 뜻이 안 변하는 단어는 뺀다.
+4. **과장하지 않는다.** 최상급, 마케팅 상투어, 감탄을 쓰지 않는다.
+5. **딱 필요한 말만.** 한 줄로 되면 한 줄로 끝낸다.
+
+#### 나쁨 / 좋음
+
+| 나쁨 | 왜 | 좋음 |
+|---|---|---|
+| `Seamlessly transform your workflow with cutting-edge AI` | 과장 + 상투어 | `Deploy in 40 seconds` |
+| `Discover our incredible range of premium expeditions` | 꾸미는 말 3개 | `Expeditions` |
+| `We are passionate about crafting beautiful experiences` | 자기 감상 | `Design studio. Oslo.` |
+| `Explore the amazing features that set us apart` | 빈 문장 | `Features` |
+| `Get started on your journey today` | 상투어 | `Start` |
+| `A truly unique approach to modern design` | 최상급 | `Since 2014` |
+
+#### 판정법
+
+쓴 뒤에 **단어를 하나씩 지워본다.** 지워도 뜻이 안 변하면 그 단어는 꾸미는 말이다.
+남은 것만 쓴다.
+
+한국어 더미가 필요한 경우에도 같다 — 명사로 끊고, 꾸미지 않고, 필요한 말만.
 
 ---
 
