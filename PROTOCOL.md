@@ -199,6 +199,25 @@ node scripts/extract-origin.mjs <원본 URL> <작업폴더>/refs
 | transition duration·easing 빈도 | 실제로 쓰는 이징 곡선. 추측하지 않는다 |
 | `getAnimations()` | 지속시간·이징·타임라인 |
 | 원본이 노출한 CSS 변수 | 간격·타이포 토큰을 그대로 받는다 |
+| `@keyframes` 본문 | 등장·전환의 수식. 추측하지 않는다 |
+| 모션 곡선(스크롤 2% × 51점) | 패럴랙스·핀의 실제 이동량 |
+| 셰이더·캔버스 명령 | WebGL 이면 GLSL 원본이 `refs/shaders/` 에 떨어진다 |
+
+### WebGL·캔버스는 못 읽는가
+
+읽는다. 페이지 스크립트보다 **먼저** 그래픽 API 를 감싸면 된다.
+`Page.addScriptToEvaluateOnNewDocument` 로 주입한다. 순서가 전부다.
+
+| 잡히는 것 | 후킹 대상 |
+|---|---|
+| GLSL 원본 | `WebGLRenderingContext.prototype.shaderSource` |
+| 드로우 콜·텍스처·버퍼 | `drawArrays` `drawElements` `texImage2D` `bufferData` |
+| 유니폼 종류와 횟수 | `uniform*` 전부 |
+| 캔버스 2D 그리기 명령 | `CanvasRenderingContext2D` 메서드 |
+| 실제 움직임 | `--frames` — 110ms 간격 16장 |
+
+**남지 않는 것은 의도다.** 무엇을 어떻게 그리는지는 남지만
+프레임마다 유니폼을 계산하는 JS 의 뜻은 따로 읽어야 한다.
 
 **SPEC.md 에 옮겨 적는다.** 옮기지 않았으면 측정하지 않은 것과 같다.
 
