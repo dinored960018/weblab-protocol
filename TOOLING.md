@@ -135,11 +135,11 @@ impeccable은 **디자인을 만드는** 도구다. 모작은 만드는 게 아�
 
 | 단계 | 주 도구 | 보조 |
 |---|---|---|
-| 4-1 원본 확보 | `capture.mjs` | **Playwright MCP** (상태별·하위페이지) |
+| 4-1 원본 확보 | `capture.mjs` · **`record-motion.mjs`** | **Playwright MCP** (상태별·하위페이지) |
 | 4-2 해부 | `measure.json` | Figma MCP (파일 있을 때만) |
 | 4-3 재현 | 원본 수치 | emil-design-eng, design-taste-frontend |
 | 4-4 기능 | 직접 구현 | **Playwright MCP** (눌러서 검증) |
-| 4-5 대조 | `capture.mjs` | **Playwright MCP**, `impeccable detect` |
+| 4-5 대조 | `capture.mjs` · **`motion-compare.mjs`** | **Playwright MCP**, `impeccable detect` |
 | 4-6 분석 | 사람 | `/impeccable critique` |
 
 ---
