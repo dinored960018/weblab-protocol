@@ -377,10 +377,17 @@ CHECKLIST 의 **창작 완료 판정**을 따른다.
   > 사용자 지시 원문: **"근데 이미지가 없잖아 이미지를 비슷한 무드로 픽사베이나 언스플래쉬같은곳에서 긁어오셈"**
 
   ```bash
-  node scripts/fetch-stock.mjs "<검색어>" <작업폴더>/assets/stock --n 8 --orientation landscape
+  node scripts/fetch-stock.mjs "<검색어> editorial photography" <작업폴더>/assets/stock --n 12
   ```
 
-  - 출처는 **Unsplash(무료분만, Unsplash+ 제외) · Pixabay** 두 곳. 둘 다 무료·상업 가능·표기 의무 없음
+  > 이어서 지시: **"감도높은 사진을 핀터레스트에서 찾아서 긁어오기"**
+
+  - **기본 출처는 Pinterest** (`--source pinterest`, 기본값). 무드가 스톡보다 훨씬 맞는다.
+    검색어에 `editorial photography` `still life` `film photography` 처럼 사진 결을 붙인다.
+    로그인 없이 검색 한 번에 약 24장이 뜬다. 모자라면 검색어를 바꿔 여러 번 돌린다
+  - Pinterest 사진은 원 게시자의 저작물이고 라이선스가 확인되지 않는다. `credits.json` 에 핀 주소를 남기고,
+    요청이 오면 바로 스톡으로 바꾼다. **다른 브랜드 로고·글자가 찍힌 사진은 고르지 않는다**
+  - 보조 출처 **Unsplash(무료분만, Unsplash+ 제외) · Pixabay** (`--source stock`). 무료·상업 가능·표기 의무 없음
   - 피사체·색·**명도**를 원본 자리에 맞춘다. 도구가 사진마다 명도(0~100)·평균색을 재서 `contact.html` 에 명도순으로 늘어놓는다.
     원본 자리 명도는 refs 에서 잰다. 흰 글씨가 올라가는 자리에 밝은 사진을 넣지 않는다
   - `credits.json`(사진 페이지 주소·라이선스·검색어)을 작업 폴더에 남긴다
