@@ -58,11 +58,15 @@ RESEARCH(월요일 리서치)는 슬롯 밖이다. 20칸을 먹지 않는다.
 | **CSS Design Awards** | WOTD / Best Innovation | `cssdesignawards.com/website-gallery` |
 | **Webby Awards** | Winner / Honoree | `winners.webbyawards.com` |
 | **Communication Arts** | Webpick of the Week | `commarts.com/webpicks` |
+| **iF Design Award** | Communication / Web 부문 수상 (한국어 모작에 한함) | `ifdesign.com/en/winner-ranking` |
+| **Red Dot Award** | Communication / Web 부문 수상 (한국어 모작에 한함) | `red-dot.org/project` |
 
 ### 금지
 
 - **국내 디자인 어워드로 대체하지 않는다.**
 - **"잘 만든 것 같은" 상용 사이트를 임의로 고르지 않는다.** 수상 이력이 없으면 대상이 아니다.
+  예외: 한국어 모작에서 위 어워드 어디에서도 쓸 만한 수상작을 못 찾았을 때만, 국내 주요 상용 사이트
+  (토스·삼성·LG·네이버·카카오 계열의 공개 소개/브랜드 사이트)를 **2순위**로 고를 수 있다. 영어 모작에는 적용하지 않는다.
 - 수상 여부가 확인 안 되면 **고르지 않는다.** 추측으로 채우지 않는다.
 - **3D 모델 비중이 큰 사이트를 고르지 않는다 (2026-09-28).** 화면을 3D 모델·렌더 영상·WebGL 장면이
   주도하는 사이트는 모작에서 그 3D 를 내가 다시 만들어야 하고, 그러면 원본보다 구려진다.
@@ -84,12 +88,19 @@ RESEARCH(월요일 리서치)는 슬롯 밖이다. 20칸을 먹지 않는다.
 - 수상일: 2026-09-xx
 ```
 
+2순위(국내 주요 상용 사이트)를 고른 경우 어워드 줄을 이렇게 적는다.
+
+```
+- 어워드: 어워드 없음 — 사용자 승인 범위
+```
+
 ### 주간 구성 규칙
 
 주 모작 10건(한국어 5 · 영어 5) 중 **최소 4건은 멀티페이지 사이트**여야 한다.
 
 **한국어 모작**은 한국어 화면의 수상작이다. Awwwards 국가 필터
-`awwwards.com/websites/South%20Korea/` 에서 찾는다. 노미니는 수상이 아니므로 뺀다.
+`awwwards.com/websites/South%20Korea/` 에서 찾고, iF·Red Dot(Communication/Web 부문) 수상작도 허용한다.
+노미니는 수상이 아니므로 뺀다.
 원페이지 스크롤 사이트만 계속 하면 내비게이션·라우팅·하위 페이지 설계를 못 배운다.
 
 ---
@@ -327,6 +338,7 @@ node scripts/extract-origin.mjs http://127.0.0.1:<포트>/ /tmp/mine
 1. **기획서 먼저.** 월요일 RESEARCH 에서 `research/<주차>/build-concepts.md` 에 쓴다.
    한 줄 정의 · 소재 선정 이유 · 페이지 구조 · 기능 · 컬러 토큰 · 서체 · 모션 · 카피 예시 · 선 긋기.
 2. **사람이 확인한다.** 확인 전에 만들지 않는다.
+   단, **무인 모드(2026-10-12)** 에서는 이 확인이 상시 승인으로 갈음된다 — 9절 「무인 모드」 참조.
 3. 재현과 같은 기준으로 만든다 — 4-3(정적 HTML, 실제 링크), 4-4(기능 전부 동작), 4-5(게이트).
 4. `README.md` 에 기획·토큰(대비비 포함)·페이지·모션·검수 결과·남은 것을 적는다.
 
@@ -462,12 +474,16 @@ CHECKLIST 의 **창작 완료 판정**을 따른다.
 ## 7. 커밋
 
 - WORK 하나가 커밋 하나.
-- 메시지 형식:
+- 메시지 형식 (실제 관행):
   ```
-  clone(2026-W38): cerebrium 재현
-  build(2026-W40): saemul 창작
-  research(2026-W38): 컨셉 7개
+  clone <id>: <title> (<원본> <어워드>) + MADE YYMMDD
+  studio <id>: <title> + concepts §N + MADE YYMMDD
+
+  Co-Authored-By: <모델명> <noreply@anthropic.com>
   ```
+  - 첫 줄은 위 형식, 빈 줄 하나, 그 아래 `Co-Authored-By` 줄.
+  - 모작은 `clone`, 창작은 `studio`. `concepts §N` 은 `build-concepts.md` 의 해당 절 번호.
+  - 월요일 리서치 커밋은 `research(2026-W38): 컨셉 7개` 형식을 유지한다.
 - 산출물 커밋 후 `node scripts/build-index.mjs`로 내부 갤러리를,
   `node scripts/publish.mjs`로 공개 갤러리를 갱신한다.
 
@@ -485,7 +501,7 @@ research/<주차>/
 ├─ npm.json      [자동] 다음 주 증감 계산용
 ├─ sources.md    ★ 출처 원장. 무엇을 어디서 어떻게 확인했나
 ├─ targets.md    ★ 이번 주 모작 대상 10건(한국어 5 · 영어 5). 어워드 출처·구조·기능 실측 포함
-├─ build-concepts.md ★ 이번 주 창작 기획서 10건(한국어 5 · 영어 5). 사람이 확인한다
+├─ build-concepts.md ★ 이번 주 창작 기획서 10건(한국어 5 · 영어 5). 사람이 확인하거나 무인 모드 상시 승인(§9 무인 모드)
 ├─ concepts.md     컨셉 7개 (사람이 해석)
 └─ notes/
     ├─ icons.md    아이콘 라이브러리 판세
@@ -532,3 +548,15 @@ research/<주차>/
 5. `CHECKLIST.md`로 완료를 판정하고 커밋한다
 
 **3번의 확인을 건너뛰지 않는다.** 무엇을 모작하고 무엇을 창작할지는 사람이 정한다.
+
+### 무인 모드 (2026-10-12)
+
+worklog 가 돌리는 작업은 사용자 지시 **"제작까지 전부 자동"** 으로 3번의 확인이 **상시 승인**된 것으로 본다.
+이 모드에서는 질문으로 멈추지 않고 대상 제안부터 제작·커밋까지 이어간다.
+
+- **제외 기준**: `worklog/data/weblab-exclusions.json`(수동 목록)에 더해, `works/` 에 이미 있는 대상과
+  `weblab-dropped` 로 기록된 대상이 자동으로 제외된다.
+- **근거 기록**: 왜 이 대상을 골랐는지는 모작이면 SPEC.md 의 "대상 선정 근거" 표에, 창작이면 기획서
+  (`build-concepts.md`) 해당 절에 남긴다. 사람이 묻지 않아도 나중에 읽고 판단할 수 있어야 한다.
+- **멈춤 금지**: 확인이 필요해 보이는 경우에도 질문으로 작업을 멈추지 않는다. 판단하고 근거를 적은 뒤 진행한다.
+- 무인 모드가 아닌 세션(사람이 직접 "오늘 작업 시작"을 말한 경우)은 기존대로 3번의 확인을 받는다.
