@@ -7,7 +7,9 @@
 ## 모작 완료 판정
 
 ### 대상 자격 — 여기서 걸리면 나머지는 의미 없다
-- [ ] 국제 공인 어워드 **수상작**이다 (Awwwards / FWA / CSSDA / Webby / Communication Arts)
+- [ ] 국제 공인 어워드 **수상작**이다 (Awwwards / FWA / CSSDA / Webby / Communication Arts.
+      한국어 모작은 iF / Red Dot Communication·Web 부문도 된다)
+- [ ] 수상작이 아니면: 한국어 모작이고, 수상작을 못 찾아 국내 주요 상용 사이트를 **2순위**로 골랐다는 근거가 SPEC 에 있다 (PROTOCOL 2절)
 - [ ] 어워드 출처 URL과 수상 등급이 `SPEC.md` 맨 위에 적혀 있다
 - [ ] "잘 만든 것 같아서" 고른 게 아니다
 - [ ] 3D 모델·렌더 영상·WebGL 장면이 화면을 주도하는 사이트가 아니다 (2D 코드 구현 우선)
@@ -30,6 +32,7 @@
 - [ ] 모션이 있다면 방향·속도·시차가 원본과 같다
 - [ ] `record-motion.mjs` 로 원본·모작을 녹화하고 `motion-compare.mjs` 로 붙여 봤다
 - [ ] 원본에만 있는 모션(비교표 빨간 줄)을 옮겼다. 못 옮긴 것은 SPEC 에 이유가 있다
+- [ ] `extract-origin.mjs` 실측 대조 — 문서 높이 ±15%, 섹션 수 같음 (PROTOCOL 4-6)
 
 ### 기능 — Playwright MCP로 실제로 눌러서 확인한다
 
@@ -60,7 +63,7 @@
 ### 규칙 준수
 - [ ] 원본 텍스트를 그대로 쓴 곳이 없다
 - [ ] 원본 이미지 / 로고를 가져온 게 없다
-- [ ] 사진 자리는 `fetch-stock.mjs` 로 받은 같은 무드의 사진(Pinterest 기본 · 스톡 보조)이다. `credits.json` 이 있다
+- [ ] 사진 자리는 `fetch-stock.mjs` 로 받은 같은 무드의 사진(Unsplash·Pixabay 기본 · Pinterest 보조)이다. `credits.json` 이 있다
 - [ ] 다른 브랜드 로고·글자가 찍힌 사진이 없다
 - [ ] **더미 언어가 원본과 같다** (영문 사이트면 영문)
 - [ ] `Lorem ipsum`이 없다
@@ -74,9 +77,11 @@
 - [ ] 과장·최상급·마케팅 상투어가 없다
 - [ ] 한 줄로 될 것을 두 줄로 쓰지 않았다
 
-### 커밋 전 게이트
-- [ ] `npx --yes impeccable@latest detect <파일>` 통과
+### 커밋 전 게이트 (PROTOCOL 4-6)
+- [ ] `node scripts/verify-site.mjs <URL>` 통과
+- [ ] `npx --yes impeccable@4.7.0 detect <파일>` 통과
       (걸린 규칙은 원본이 아니라 내가 흘린 AI 흔적이다)
+- [ ] 한국어 화면이면 `node scripts/check-korean.mjs <경로>` 통과 + 사람이 한 번 읽었다
 
 ### 동작
 - [ ] 콘솔 에러 없음
@@ -107,7 +112,7 @@
 - [ ] 한국어 화면이면 `check-korean.mjs` 통과 + 사람이 한 번 읽었다
 
 ### 커밋 전 게이트
-- [ ] `verify-site.mjs` · `impeccable detect` 통과
+- [ ] `verify-site.mjs` · `impeccable detect` 통과 (`check-korean.mjs` 는 위 말투 항목)
 
 ---
 
