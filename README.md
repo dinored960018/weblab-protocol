@@ -25,4 +25,4 @@ CLI 도구(Claude Code, Codex CLI)는 작업 레포의 `CLAUDE.md` / `AGENTS.md`
 | `GLOSSARY.md` | 용어 사전. 시스템 용어 + 웹 용어(매주 자람) |
 | `CHECKLIST.md` | 완료 판정 기준. 모작·창작(조각 대조 포함)·주간 구성·RESEARCH |
 | `KOREAN.md` | 한국어가 화면에 나갈 때의 규정. 어문 규범 + 글의 뼈대 |
-| `templates/` | SPEC / REVIEW / CONCEPTS 템플릿 |
+| `templates/` | SPEC / REVIEW(가져다 쓸 조각) / CONCEPTS / BUILD-CONCEPT(창작 기획서 · 조각 표) / PARTS(조각 목록) 템플릿 |
